@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { fetchProjects, fetchProjectTasks } from '../services/ProjectService';
 import ApperIcon from '../components/ApperIcon';
 import ProjectCard from '../components/ProjectCard';
 
 const Project = () => {
   const { projectId } = useParams();
+  const navigate = useNavigate();
   const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
   const [projectTasks, setProjectTasks] = useState([]);
@@ -64,7 +65,7 @@ const Project = () => {
 
   // If a specific project is selected, render the project detail
   if (selectedProject) {
-    return <ProjectDetail project={selectedProject} tasks={projectTasks} />;
+    navigate(`/projects/${encodeURIComponent(selectedProject)}`);
   }
 
   // Otherwise render the projects list
