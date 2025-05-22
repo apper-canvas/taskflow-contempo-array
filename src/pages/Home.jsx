@@ -1,10 +1,18 @@
 import { motion } from 'framer-motion';
+import { useSelector } from 'react-redux';
 import MainFeature from '../components/MainFeature';
 import ApperIcon from '../components/ApperIcon';
 
 const Home = () => {
+  const { user } = useSelector((state) => state.user);
+  const firstName = user?.firstName || user?.name?.split(' ')[0] || 'User';
+  
   return (
-    <div className="container mx-auto px-4 py-6">
+    <div className="container mx-auto px-4 py-6 min-h-screen">
+      <div className="mb-3 text-right">
+        <p className="text-surface-600 dark:text-surface-300">Welcome, {firstName}!</p>
+      </div>
+      
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -17,7 +25,7 @@ const Home = () => {
             </div>
           </div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-surface-800 dark:text-white mb-4">
-            Welcome to <span className="text-primary">TaskFlow</span>
+            Your <span className="text-primary">TaskFlow</span> Dashboard
           </h1>
           <p className="text-surface-600 dark:text-surface-300 max-w-2xl mx-auto text-lg">
             Organize your tasks efficiently and boost your productivity.
