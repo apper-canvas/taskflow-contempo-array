@@ -714,58 +714,6 @@ const MainFeature = () => {
 };
 
 export default MainFeature;
-        ...newTask,
-        id: Date.now().toString(),
-        createdAt: new Date().toISOString()
-      };
-      setTasks([task, ...tasks]);
-      toast.success("Task added successfully!");
-    }
-    
-    // Reset form
-    setNewTask({
-      title: '',
-      description: '',
-      status: 'Not Started',
-      priority: 'Medium',
-      dueDate: new Date().toISOString().split('T')[0],
-      category: 'Personal'
-    });
-    setShowForm(false);
-  };
-
-  // Edit a task
-  const handleEdit = (id) => {
-    const taskToEdit = tasks.find(task => task.id === id);
-    if (taskToEdit) {
-      setNewTask({
-        ...taskToEdit,
-        dueDate: taskToEdit.dueDate.split('T')[0]
-      });
-      setIsEditing(true);
-      setEditingId(id);
-      setShowForm(true);
-    }
-  };
-
-  // Delete a task
-  const handleDelete = (id) => {
-    setTasks(tasks.filter(task => task.id !== id));
-    toast.success("Task deleted successfully!");
-  };
-
-  // Toggle task status
-  const toggleStatus = (id) => {
-    setTasks(tasks.map(task => {
-      if (task.id === id) {
-        const newStatus = task.status === 'Completed' ? 'Not Started' : 'Completed';
-        const message = newStatus === 'Completed' ? "Task marked as completed!" : "Task reopened!";
-        toast.info(message);
-        return { ...task, status: newStatus };
-      }
-      return task;
-    }));
-  };
 
   // Filter tasks based on current filters and search
   const filteredTasks = tasks.filter(task => {
