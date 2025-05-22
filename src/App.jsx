@@ -10,6 +10,8 @@ import Signup from './pages/Signup';
 import Callback from './pages/Callback';
 import ErrorPage from './pages/ErrorPage';
 import ApperIcon from './components/ApperIcon';
+import Project from './pages/Project';
+import ProjectDetail from './pages/ProjectDetail';
 
 // Create auth context
 export const AuthContext = createContext(null);
@@ -146,7 +148,21 @@ function App() {
           <header className="fixed top-0 left-0 right-0 z-10 bg-white dark:bg-surface-900 shadow-sm px-4 py-3 flex justify-between items-center">
             <div className="flex items-center space-x-2">
               <ApperIcon name="CheckSquare" className="h-6 w-6 text-primary" />
-              <h1 className="text-lg md:text-xl font-bold text-primary">TaskFlow</h1>
+              <h1 className="text-lg md:text-xl font-bold text-primary">
+                <Link to="/">TaskFlow</Link>
+              </h1>
+            </div>
+            <div className="flex items-center space-x-4">
+              <nav>
+                <ul className="flex space-x-6">
+                  <li>
+                    <Link to="/" className="text-surface-600 dark:text-surface-300 hover:text-primary dark:hover:text-primary-light transition-colors">Tasks</Link>
+                  </li>
+                  <li>
+                    <Link to="/projects" className="text-surface-600 dark:text-surface-300 hover:text-primary dark:hover:text-primary-light transition-colors">Projects</Link>
+                  </li>
+                </ul>
+              </nav>
             </div>
             <div className="flex items-center gap-4">
               <button 
@@ -179,6 +195,8 @@ function App() {
             <Route path="/callback" element={<Callback />} />
             <Route path="/error" element={<ErrorPage />} />
             <Route path="/" element={isAuthenticated ? <Home /> : <Login />} />
+            <Route path="/projects" element={isAuthenticated ? <Project /> : <Login />} />
+            <Route path="/projects/:projectId" element={isAuthenticated ? <ProjectDetail /> : <Login />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
